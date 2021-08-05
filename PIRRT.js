@@ -17,7 +17,18 @@ let qeff_table = [
 ]
 
 let calc_table = [
-	{label:"Filtration fraction", type:"calculated"}
+	{label:"Filtration fraction", type:"calculated"},
+	{label:"Qb/Qd", type:"calculated"},
+	{label:"PFR Rate (mL/kg/hr)", type:"calculated"},
+	{label:"Volume of distribution", type:"calculated"},
+	{label:"Calc. Clearance (mL/hr)", type:"calculated"},
+	{label:"Calc. Clearance (mL/min)", type:"calculated"}
+]
+
+let time_into_treatment = [
+	{label:"Predicted BUN3", type:"calculated"},
+	{label:"% Hourly URR", type:"calculated"},
+	{label:"Overall URR", type:"calculated"}
 ]
 
 function generateTable(table, data) {
@@ -92,8 +103,10 @@ function qeff_calc() {
 window.onload = function () {
 	var qtable = document.getElementById("q_table");
 	var qefftable = document.getElementById("qeff_table");
-	var calctable = document.getElementById("calculated_values")
+	var calctable = document.getElementById("calculated_values");
+	var timeintotreatment = document.getElementById("time_into_treatment");
 	generateTable(qtable, q_table);
 	generateTable(qefftable, qeff_table);
 	generateTable(calctable, calc_table);
+	generateTable(timeintotreatment, time_into_treatment);
 }
