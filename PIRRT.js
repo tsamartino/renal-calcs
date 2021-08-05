@@ -102,31 +102,10 @@ function min_to_hour() {
 function qeff_calc() {
 	var id = event.target.id;
 	var id = id.toString();
-	if (id.slice(-1) == 1) {
-		console.log("going")
-		var result = Number(document.getElementById("result21").innerHTML.replace("-","0")) + Number(document.getElementById("result41").innerHTML.replace("-","0")) + Number(document.getElementById("result61").innerHTML.replace("-","0")) + Number(document.getElementById("result81").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 2) {
-		var result = Number(document.getElementById("result22").innerHTML.replace("-","0")) + Number(document.getElementById("result42").innerHTML.replace("-","0")) + Number(document.getElementById("result62").innerHTML.replace("-","0")) + Number(document.getElementById("result82").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 3) {
-		var result = Number(document.getElementById("result23").innerHTML.replace("-","0")) + Number(document.getElementById("result43").innerHTML.replace("-","0")) + Number(document.getElementById("result63").innerHTML.replace("-","0")) + Number(document.getElementById("result83").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 4) {
-		var result = Number(document.getElementById("result24").innerHTML.replace("-","0")) + Number(document.getElementById("result44").innerHTML.replace("-","0")) + Number(document.getElementById("result64").innerHTML.replace("-","0")) + Number(document.getElementById("result84").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 5) {
-		var result = Number(document.getElementById("result25").innerHTML.replace("-","0")) + Number(document.getElementById("result45").innerHTML.replace("-","0")) + Number(document.getElementById("result65").innerHTML.replace("-","0")) + Number(document.getElementById("result85").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 6) {
-		var result = Number(document.getElementById("result26").innerHTML.replace("-","0")) + Number(document.getElementById("result46").innerHTML.replace("-","0")) + Number(document.getElementById("result66").innerHTML.replace("-","0")) + Number(document.getElementById("result86").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 7) {
-		var result = Number(document.getElementById("result27").innerHTML.replace("-","0")) + Number(document.getElementById("result47").innerHTML.replace("-","0")) + Number(document.getElementById("result67").innerHTML.replace("-","0")) + Number(document.getElementById("result87").innerHTML.replace("-","0"));
-	}
-	if (id.slice(-1) == 8) {
-		var result = Number(document.getElementById("result28").innerHTML.replace("-","0")) + Number(document.getElementById("result48").innerHTML.replace("-","0")) + Number(document.getElementById("result68").innerHTML.replace("-","0")) + Number(document.getElementById("result88").innerHTML.replace("-","0"));
-	}							
+	var result = Number(document.getElementById("result2"+id.slice(-1)).innerHTML.replace("-","0")) +
+							 Number(document.getElementById("result4"+id.slice(-1)).innerHTML.replace("-","0")) +
+							 Number(document.getElementById("result6"+id.slice(-1)).innerHTML.replace("-","0")) +
+							 Number(document.getElementById("result8"+id.slice(-1)).innerHTML.replace("-","0"));		
 	var x = document.getElementById(id).value;
 	var resultid = "qeff_result1"+id.slice(-1)
 	if (id.slice(-2, -1) != 1) {
