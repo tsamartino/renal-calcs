@@ -79,7 +79,6 @@ function generateTableQeff(table, data) {
 						var id = id.toString();
 						cell.innerHTML = "-"
 						cell.setAttribute("id", "qeff_result"+id)
-						cell.setAttribute("style", "overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:4ch;")
 					}
 				}
 				x++;
@@ -94,7 +93,8 @@ function min_to_hour() {
 	var x = document.getElementById(id).value;
 	var resultid = event.target.id.replace("q_table", "result");
 	try {
-		document.getElementById(resultid).innerHTML = x / 60;
+		result = x / 60;
+		document.getElementById(resultid).innerHTML = +result.toFixed(2);
 	}catch{}
 	qeff_calc();
 }
@@ -102,8 +102,8 @@ function min_to_hour() {
 function qeff_calc() {
 	var id = event.target.id;
 	var id = id.toString();
-	console.log(id)
 	if (id.slice(-1) == 1) {
+		console.log("going")
 		var result = Number(document.getElementById("result21").innerHTML.replace("-","0")) + Number(document.getElementById("result41").innerHTML.replace("-","0")) + Number(document.getElementById("result61").innerHTML.replace("-","0")) + Number(document.getElementById("result81").innerHTML.replace("-","0"));
 	}
 	if (id.slice(-1) == 2) {
@@ -129,7 +129,9 @@ function qeff_calc() {
 	}							
 	var x = document.getElementById(id).value;
 	var resultid = "qeff_result1"+id.slice(-1)
-	document.getElementById(resultid).innerHTML = result;
+	if (id.slice(-2, -1) != 1) {
+		document.getElementById(resultid).innerHTML = +result.toFixed(2);
+	}
 }
 
 window.onload = function () {
