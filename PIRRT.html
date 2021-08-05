@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="PIRRT.css">
+<script src="PIRRT.js"></script> 
+</head>
+
+<body>
+<div><h1>PIRRT prescription</h1>
+<p>From therapy fluids rates</p></div>
+<br>
+
+<!-- <div class="container">
+    <div class="row">
+
+        <div class="col"> -->
+            <table class="PIRRT-header">
+                <tr>
+                    <td>
+                        <label for="bw">BW (kg)</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="bw">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">kg</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="vd_perc">% Vd</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="vd_perc">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="vd_ml">Vd (ml)</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="vd_ml">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">mL</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="bun">Starting BUN</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="bun">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">mg/dL</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="pcv">PCV %</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="pcv">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+<!--             </div>
+ -->            
+            <br><br>
+
+<!--             <div class="col">
+ -->            <table>
+                <tr>
+                    <td>
+                        <label for="target">Treatment target URR:</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="target">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label for="time">over</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="time">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">hours</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </table>
+
+                <br><br>
+
+                <table>
+                <tr>
+                    <td>
+                        <label for="ktv">KT/V</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="ktv">
+            <!--                 <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+                            </div> -->
+                        </div>
+                    </td>
+                    <td>
+                        <label for="kt">KT</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="time">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">mL</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <label for="clearance">Clearance/h</label>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="clearance">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">mL</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+<!--             </div>
+        </div>
+    </div>
+</div> -->
+
+<br><br>
+
+<h3 style="text-align: center;">Prescription</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Treatment<br>(hour)</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+            <th scope="col">6</th>
+            <th scope="col">7</th>
+            <th scope="col">8</th>
+        </tr>
+        <tr>
+            <th scope="col">Treatment<br>(min)</th>
+            <th scope="col">0</th>
+            <th scope="col">60</th>
+            <th scope="col">120</th>
+            <th scope="col">180</th>
+            <th scope="col">240</th>
+            <th scope="col">300</th>
+            <th scope="col">360</th>
+            <th scope="col">420</th>
+        </tr>
+    </thead>
+    <tbody id="q_table">
+
+    </tbody>
+</table>
+
+<br>
+
+<table class="table">
+    <tbody = id="qeff_table">
+
+    </tbody>
+</table>
+</body>
+
+</html>
