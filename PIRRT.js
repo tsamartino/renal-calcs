@@ -16,44 +16,11 @@ let qeff_table = [
 	{label:"Saturation ratio (%)", type:"input"}
 ]
 
-function generateTableQ(table, data) {
-  let x = 1;
-  for (let element of data) {
-    let row = table.insertRow();
-    let n = 0;
-    for (var key in element) {
-      var value = element[key];
-      if (n == 0) {
-      	let cell = row.insertCell();
-      	let text = document.createTextNode(element[key]);
-      	cell.appendChild(text);
-      	cell.outerHTML = '<th scope="row">'+value+'</th>';
-      	n++;
-      }else{
-      	while (n < 9) {
-      		n++;
-      		let cell = row.insertCell();
-	      	if (value == "input") {
-	      		var id = x + "" + n-1; 
-	      		var id = id.toString();
-	      		cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="q_table'+id+'" oninput="min_to_hour()"></div>'
-	      	}else{
-	      		//calculated field
-	      		var id = x-1 + "" + n-1;
-	      		var id = id.toString();
-	      		cell.innerHTML = "-";
-	      		cell.setAttribute("onchange", "qeff_calc()")
-	      		cell.setAttribute("id", "result"+id)
-	      		cell.setAttribute("style", "overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:4ch;")
-	      	}
-      	}
-      	x++;
-      }
-    }
-  }
-}
+let calc_table = [
+	{label:"Filtration fraction", type:"calculated"}
+]
 
-function generateTableQeff(table, data) {
+function generateTable(table, data) {
 	let x = 1;
 	for (let element of data) {
 		let row = table.insertRow();
@@ -66,19 +33,27 @@ function generateTableQeff(table, data) {
 				cell.appendChild(text);
 				cell.outerHTML = '<th scope="row">'+value+'</th>';
 				n++;
-			}else{			
+			}else{
 				while (n < 9) {
 					n++;
 					let cell = row.insertCell();
 					if (value == "input") {
 						var id = x + "" + n-1;
 						var id = id.toString();
-						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="qeff_table'+id+'" oninput=""></div>'
+						//only difference is table ID and oninput
+						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="'+table.id+id+'" oninput="min_to_hour()"></div>';
 					}else{
 						var id = x + "" + n-1;
 						var id = id.toString();
-						cell.innerHTML = "-"
-						cell.setAttribute("id", "qeff_result"+id)
+						cell.innerHTML = "-";
+						//only difference is table ID
+						cell.setAttribute("id", table.id+id);
+						if (table.id == "q_table") {
+							cell.setAttribute("onchange", "qeff_calc()");
+							cell.setAttribute("id", "result"+(id-10));
+						} else if (table.id == "qeff_table") {
+							cell.setAttribute("id", "qeff_result"+id)
+						}
 					}
 				}
 				x++;
@@ -101,6 +76,7 @@ function min_to_hour() {
 
 function qeff_calc() {
 	var id = event.target.id;
+	console.log(id)
 	var id = id.toString();
 	var result = Number(document.getElementById("result2"+id.slice(-1)).innerHTML.replace("-","0")) +
 							 Number(document.getElementById("result4"+id.slice(-1)).innerHTML.replace("-","0")) +
@@ -116,6 +92,8 @@ function qeff_calc() {
 window.onload = function () {
 	var qtable = document.getElementById("q_table");
 	var qefftable = document.getElementById("qeff_table");
-	generateTableQ(qtable, q_table);
-	generateTableQeff(qefftable, qeff_table);
+	var calctable = document.getElementById("calculated_values")
+	generateTable(qtable, q_table);
+	generateTable(qefftable, qeff_table);
+	generateTable(calctable, calc_table);
 }
