@@ -1,5 +1,4 @@
 let q_table = [
-	// {label:"Prescription", type:"empty"},
 	{label:"Qb (mL/min)", type:"input"},
 	{label:"Qd (mL/hr)", type:"input"},
 	{label:"Qd (mL/min)", type:"calculated"},
