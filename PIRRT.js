@@ -68,6 +68,8 @@ function generateTable(table, data) {
                             cell.setAttribute("id", "result" + (id - 10));
                         } else if (table.id == "qeff_table") {
                             cell.setAttribute("id", "qeff_result" + id)
+                        } else if (table.id == "time_into_treatment" && id.slice(-2) == "09") {
+                        	cell.setAttribute("id", "time_into_treatment" + x + id.slice(-1))
                         }
                     }
                 }
@@ -82,7 +84,6 @@ function calculate() {
     var id = id.toString();
     if (id == "pcv") {
     	// Recalculate all filtration fraction values
-    	console.log("pcv changed")
     }else{
 	    var x = document.getElementById(id).value;
 	    var resultid = event.target.id.replace("q_table", "result");
@@ -93,6 +94,7 @@ function calculate() {
 
 	    var bw = Number(document.getElementById("bw").value.replace(null,0));
 	    var pcv = exactMath.mul(Number(document.getElementById("pcv").value.replace(null,0)), .01);
+	    var vol_ml = document.getElementById("vd_ml").value;
 
 	    var qb_min = Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0));
   	  var qd_hr = Number(document.getElementById("q_table2" + id.slice(-1)).value.replace(null,0));
@@ -149,7 +151,20 @@ function calculate() {
 	    	var calcclearminid = "calculated_values6" + id.slice(-1);
 	    	document.getElementById(calcclearhrid).innerHTML = +satresult.toFixed(2);
 	    	document.getElementById(calcclearminid).innerHTML = +satresultmin.toFixed(2);
-	    }
+				}
+
+			// % Hourly URR caclulcation
+			var perc_urr = exactMath.mul(exactMath.sub(1, Math.exp(exactMath.div(exactMath.mul(satresult, -1), vol_ml))), 100);
+			if (!isNaN(perc_urr) && perc_urr != 0) {
+				var perc_urrid = "time_into_treatment2" + (Number(id.slice(-1))+2);
+				document.getElementById(perc_urrid).innerHTML = +perc_urr.toFixed(0) + " %";
+			}
+
+			// Predicted BUN3 calculation
+
+
+			// Overall URR calculation
+
     }
 }
 
