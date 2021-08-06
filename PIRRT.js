@@ -156,7 +156,7 @@ function calculate() {
 			// % Hourly URR caclulcation
 			var perc_urr = exactMath.mul(exactMath.sub(1, Math.exp(exactMath.div(exactMath.mul(satresult, -1), vol_ml))), 100);
 			if (!isNaN(perc_urr) && perc_urr != 0) {
-				var perc_urrid = "time_into_treatment2" + (Number(id.slice(-1))+2);
+				var perc_urrid = "time_into_treatment2" + (Number(id.slice(-1))+1);
 				document.getElementById(perc_urrid).innerHTML = +perc_urr.toFixed(0) + " %";
 			}
 
