@@ -56,14 +56,14 @@ function generateTable(table, data) {
 					if (value == "input") {
 						var id = x + "" + n-1;
 						var id = id.toString();
-						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="'+table.id+id+'" oninput="min_to_hour()"></div>';
+						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="'+table.id+id+'" oninput="calculate()"></div>';
 					}else{
 						var id = x + "" + n-1;
 						var id = id.toString();
 						cell.innerHTML = "-";
 						cell.setAttribute("id", table.id+id);
 						if (table.id == "q_table") {
-							cell.setAttribute("onchange", "qeff_calc()");
+							cell.setAttribute("onchange", "calculate()");
 							cell.setAttribute("id", "result"+(id-10));
 						} else if (table.id == "qeff_table") {
 							cell.setAttribute("id", "qeff_result"+id)
@@ -76,7 +76,7 @@ function generateTable(table, data) {
 	}
 }
 
-function min_to_hour() {
+function calculate() {
 	var id = event.target.id;
 	var id = id.toString();
 	var x = document.getElementById(id).value;
@@ -85,24 +85,32 @@ function min_to_hour() {
 		result = x / 60;
 		document.getElementById(resultid).innerHTML = +result.toFixed(2);
 	}catch{}
-	qeff_calc();
-}
-
-function qeff_calc() {
-	var id = event.target.id;
-	console.log(id)
-	var id = id.toString();
-	var result = Number(document.getElementById("result2"+id.slice(-1)).innerHTML.replace("-","0")) +
-							 Number(document.getElementById("result4"+id.slice(-1)).innerHTML.replace("-","0")) +
-							 Number(document.getElementById("result6"+id.slice(-1)).innerHTML.replace("-","0")) +
-							 Number(document.getElementById("result8"+id.slice(-1)).innerHTML.replace("-","0"));		
-	var x = document.getElementById(id).value;
-	var resultid = "qeff_result1"+id.slice(-1)
-	if (id.slice(-2, -1) != 1) {
-		document.getElementById(resultid).innerHTML = +result.toFixed(2);
+	if (id.slice(0,7) == "q_table") {
+		var result = Number(document.getElementById("result2"+id.slice(-1)).innerHTML.replace("-","0")) +
+								 Number(document.getElementById("result4"+id.slice(-1)).innerHTML.replace("-","0")) +
+								 Number(document.getElementById("result6"+id.slice(-1)).innerHTML.replace("-","0")) +
+								 Number(document.getElementById("result8"+id.slice(-1)).innerHTML.replace("-","0"));		
+		var x = document.getElementById(id).value;
+		var resultid = "qeff_result1"+id.slice(-1);
+		if (id.slice(-2, -1) != 1) {
+			document.getElementById(resultid).innerHTML = +result.toFixed(2);
+		}
 	}
+		ff_calc();
 }
 
+
+function ff_calc() {
+	var id = event.target.id;
+	var id = id.toString();
+	var result = Number(document.getElementById("pcv"));
+	// Number(document.getElementById("calculated_values1"+id.slice(-1)).innerHTML.replace("-","0"));
+	var x = document.getElementById(id).value;
+	var resultid = "calculated_values1"+id.slice(-1);
+	document.getElementById(resultid).innerHTML = +result.toFixed(2);
+}
+
+// Generates tables using ID given from HTML and arrays specifying row headers at top of file
 window.onload = function () {
 	var qtable = document.getElementById("q_table");
 	var qefftable = document.getElementById("qeff_table");
