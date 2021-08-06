@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/index.html">Renal Calculators</a>
+            <a class="navbar-brand" href="/renal-calcs/index.html">Renal Calculators</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -71,7 +71,7 @@
                         <td>
                             <div class="input-group input-group-sm">
                                 <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                id="vd_ml">
+                                id="vd_ml" oninput="distvolume()">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">mL</span>
                                 </div>
@@ -85,7 +85,7 @@
                         <td>
                             <div class="input-group input-group-sm">
                                 <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                id="bun">
+                                id="bun" oninput="bun()">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">mg/dL</span>
                                 </div>

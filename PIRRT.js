@@ -1,3 +1,4 @@
+// Arrays that define table rows
 let q_table = [
 	{label:"Qb (mL/min)", type:"input"},
 	{label:"Qd (mL/hr)", type:"input"},
@@ -30,6 +31,7 @@ let time_into_treatment = [
 	{label:"Overall URR", type:"calculated"}
 ]
 
+// Function to generate tables
 function generateTable(table, data) {
     let x = 1;
     for (let element of data) {
@@ -89,6 +91,7 @@ function calculate() {
 	        document.getElementById(resultid).innerHTML = +result.toFixed(2);
 	    } catch {}
 
+	    var bw = Number(document.getElementById("bw").value.replace(null,0));
 	    var pcv = exactMath.mul(Number(document.getElementById("pcv").value.replace(null,0)), .01);
 
 	    var qb_min = Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0));
@@ -114,12 +117,40 @@ function calculate() {
 	    }
 
 	    // Filtration fraction calculation
-	    var ffresult = exactMath.div((exactMath.add(qrep_pre_min, qrep_post_min, qpfr_min)), exactMath.mul(exactMath.add(qrep_pre_min, qb_min), exactMath.div(exactMath.sub(1, pcv),100)));
-	    console.log(ffresult)
-	    
-	    var ffresultid = "calculated_values1" + id.slice(-1);
-	    document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2) + " %";
+	    var ffresult = exactMath.div((exactMath.add(qrep_pre_min, qrep_post_min, qpfr_min)), exactMath.mul(exactMath.add(qrep_pre_min, qb_min), exactMath.div(exactMath.sub(1, pcv),100)));	    
+	    if (!isNaN(ffresult)) {
+		    var ffresultid = "calculated_values1" + id.slice(-1);
+		    document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2) + " %";
+	    }
+
+	    // Qb/Qd calculation
+	    if (qb_min != 0 && qd_min != 0) {
+				var qb_qdresult = exactMath.div(qb_min, qd_min);
+	    	var qb_qdresultid = "calculated_values2" + id.slice(-1);
+	    	document.getElementById(qb_qdresultid).innerHTML = +qb_qdresult.toFixed(2);
+	    }
+
+	    // PFR Rate calculation
+	    var pfrresult = exactMath.div(qpfr_hr, bw)
+	    if (pfrresult != 0) {
+	    	var pfrresultid = "calculated_values3" + id.slice(-1);
+	    	document.getElementById(pfrresultid).innerHTML = +pfrresult.toFixed(2);
+	    }
     }
+}
+
+// Fills Volume of distribution values in calculated table
+function distvolume() {
+	let n = 0;
+	while (n < 8) {
+		n++;
+		document.getElementById("calculated_values4" + n).innerHTML = document.getElementById("vd_ml").value;
+	}
+}
+
+// Fills Predicted BUN3 values in Time into Treatment table
+function bun() {
+	document.getElementById("time_into_treatment11").innerHTML = document.getElementById("bun").value;
 }
 
 // Generates tables using ID given from HTML and arrays specifying row headers at top of file
