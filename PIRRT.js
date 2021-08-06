@@ -143,9 +143,12 @@ function calculate() {
 	    // Calc. clearance (mL/hr) calculation
 	    var satresult = exactMath.div((exactMath.mul(exactMath.add(qd_hr, qrep_pre_hr, qrep_post_hr, qpfr_hr), sat)), 
 	    	exactMath.add(1, exactMath.div(qrep_pre_hr, (exactMath.mul(qb_min, 60)))))
+	    var satresultmin = exactMath.div(satresult, 60);
 	    if (!isNaN(satresult)) {
-	    	var calcclearid = "calculated_values5" + id.slice(-1);
-	    	document.getElementById(calcclearid).innerHTML = +satresult.toFixed(2);
+	    	var calcclearhrid = "calculated_values5" + id.slice(-1);
+	    	var calcclearminid = "calculated_values6" + id.slice(-1);
+	    	document.getElementById(calcclearhrid).innerHTML = +satresult.toFixed(2);
+	    	document.getElementById(calcclearminid).innerHTML = +satresultmin.toFixed(2);
 	    }
     }
 }
