@@ -88,38 +88,38 @@ function calculate() {
 	        result = x / 60;
 	        document.getElementById(resultid).innerHTML = +result.toFixed(2);
 	    } catch {}
+
+	    var pcv = exactMath.mul(Number(document.getElementById("pcv").value.replace(null,0)), .01);
+
+	    var qb_min = Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0));
+  	  var qd_hr = Number(document.getElementById("q_table2" + id.slice(-1)).value.replace(null,0));
+  	  var qd_min = Number(document.getElementById("result2" + id.slice(-1)).innerHTML.replace("-", "0"));
+  	  var qrep_pre_hr = Number(document.getElementById("q_table4" + id.slice(-1)).value.replace(null,0));
+  		var qrep_pre_min = Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-", "0"));
+  		var qrep_post_hr = Number(document.getElementById("q_table6" + id.slice(-1)).value.replace(null, 0));
+  		var qrep_post_min = Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0"));
+  		var qpfr_hr = Number(document.getElementById("q_table8" + id.slice(-1)).value.replace(null, 0));
+  		var qpfr_min = Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
+
+  		// console.log("qb_min", qb_min, "qd_hr", qd_hr, "qd_min", qd_min, "qrep_pre_hr", qrep_pre_hr, "qrep_pre_min", qrep_pre_min, "qrep_post_hr", qrep_post_hr, 
+  		// 	"qrep_post_min", qrep_post_min, "qpfr_hr", qpfr_hr, "qpfr_min", qpfr_min)
+
 	    if (id.slice(0, 7) == "q_table") {
-	        var result = Number(document.getElementById("result2" + id.slice(-1)).innerHTML.replace("-", "0")) +
-	            Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-", "0")) +
-	            Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0")) +
-	            Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
+	        var result = exactMath.add(qd_hr, qrep_pre_hr, qrep_post_hr, qpfr_hr);
 	        var x = document.getElementById(id).value;
 	        var resultid = "qeff_result1" + id.slice(-1);
 	        if (id.slice(-2, -1) != 1) {
 	            document.getElementById(resultid).innerHTML = +result.toFixed(2);
 	        }
 	    }
-	    var ffresult = 
-	    							 // (Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
-	    							 // Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-","0")) +
-	    							 // Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-","0")))
 
-	    							 // (Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
-	    							 // Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-","0")) +
-	    							 // Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-","0"))) / 
-	    							 
-	    							 // ((Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
-	    							 // Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0))) *
-
-	    							 ((1 - Number(document.getElementById("pcv").value.replace(null,0))) / 100);
-
-			var ffresultid = "calculated_values1" + id.slice(-1);
-			document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2);
+	    // Filtration fraction calculation
+	    var ffresult = exactMath.div((exactMath.add(qrep_pre_min, qrep_post_min, qpfr_min)), exactMath.mul(exactMath.add(qrep_pre_min, qb_min), exactMath.div(exactMath.sub(1, pcv),100)));
+	    console.log(ffresult)
+	    
+	    var ffresultid = "calculated_values1" + id.slice(-1);
+	    document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2) + " %";
     }
-}
-
-function results() {
-
 }
 
 // Generates tables using ID given from HTML and arrays specifying row headers at top of file
@@ -134,8 +134,7 @@ window.onload = function() {
     generateTable(timeintotreatment, time_into_treatment);
 }
 
-console.log(0.1+0.2)
-console.log(exactMath.add(0.1,0.2))
+
 
 
 
