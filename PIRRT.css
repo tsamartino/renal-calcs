@@ -1,5 +1,5 @@
 table {
-	width: 80%;
+	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -11,9 +11,16 @@ td {
 	padding-left: 5px;
 }
 
+.table {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .table th {
 	text-align: center;
 	vertical-align: middle;	
+	width: 144.83px;
 }
 
 input {
@@ -22,4 +29,31 @@ input {
 
 h3 {
 	text-align: center;
+}
+
+.navbar-custom {
+    background-color: #022851;
+}
+
+.nav-link,
+.navbar-brand {
+    color: white;
+}
+
+.nav-link:hover,
+.navbar-brand:hover {
+    color: #FFBF00;
+}
+
+div.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.container p {
+    margin-top: 5vh;
+    text-align: center;
 }

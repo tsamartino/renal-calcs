@@ -113,7 +113,7 @@
 
     <!--             <div class="col">
  -->
-    <table>
+    <table class="PIRRT-header">
         <tr>
             <td>
                 <label for="target">Treatment target URR:</label>
@@ -144,7 +144,7 @@
 
     <br><br>
 
-    <table>
+    <table class="PIRRT-header">
         <tr>
             <td>
                 <label for="ktv">KT/V</label>
@@ -242,40 +242,28 @@
         </tbody>
     </table>
 
+    <br>
+
     <h3>Time into Treatment</h3>
     <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Time into Treatment<br>(hrs)</th>
+                <th scope="col">0</th>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">5</th>
+                <th scope="col">6</th>
+                <th scope="col">7</th>
+                <th scope="col">8</th>
+            </tr>
+        </thead>
         <tbody id="time_into_treatment">
         </tbody>
     </table>
 
-    <style>
-        .navbar-custom {
-            background-color: #022851;
-        }
-
-        .nav-link,
-        .navbar-brand {
-            color: white;
-        }
-
-        .nav-link:hover,
-        .navbar-brand:hover {
-            color: #FFBF00;
-        }
-
-        div.container {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        div.container p {
-            margin-top: 5vh;
-            text-align: center;
-        }
-    </style>
 </body>
 
 

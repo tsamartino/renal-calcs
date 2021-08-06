@@ -40,24 +40,27 @@ function generateTable(table, data) {
 			var value = element[key];
 			if (n == 0) {
 				let cell = row.insertCell();
-				let text = document.createTextNode(element[key]);
+				let text = document.createTextNode(element["label"]);
 				cell.appendChild(text);
-				cell.outerHTML = '<th scope="row">'+value+'</th>';
+				cell.outerHTML = '<th scope="row">'+element["label"]+'</th>';
 				n++;
 			}else{
-				while (n < 9) {
+				if (table.id == "time_into_treatment") {
+					var length = 10;
+				}else{
+					var length = 9;
+				}
+				while (n < length) {
 					n++;
 					let cell = row.insertCell();
 					if (value == "input") {
 						var id = x + "" + n-1;
 						var id = id.toString();
-						//only difference is table ID and oninput
 						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="'+table.id+id+'" oninput="min_to_hour()"></div>';
 					}else{
 						var id = x + "" + n-1;
 						var id = id.toString();
 						cell.innerHTML = "-";
-						//only difference is table ID
 						cell.setAttribute("id", table.id+id);
 						if (table.id == "q_table") {
 							cell.setAttribute("onchange", "qeff_calc()");
