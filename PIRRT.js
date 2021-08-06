@@ -103,6 +103,7 @@ function calculate() {
   		var qrep_post_min = Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0"));
   		var qpfr_hr = Number(document.getElementById("q_table8" + id.slice(-1)).value.replace(null, 0));
   		var qpfr_min = Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
+  		var sat = exactMath.mul(Number(document.getElementById("qeff_table2" + id.slice(-1)).value.replace(null,0)), .01);
 
   		// console.log("qb_min", qb_min, "qd_hr", qd_hr, "qd_min", qd_min, "qrep_pre_hr", qrep_pre_hr, "qrep_pre_min", qrep_pre_min, "qrep_post_hr", qrep_post_hr, 
   		// 	"qrep_post_min", qrep_post_min, "qpfr_hr", qpfr_hr, "qpfr_min", qpfr_min)
@@ -116,7 +117,7 @@ function calculate() {
 	        }
 	    }
 
-	    // Filtration fraction calculation
+	    // Filtration fraction calculation -- WHY IS THIS WRONG?!
 	    var ffresult = exactMath.div((exactMath.add(qrep_pre_min, qrep_post_min, qpfr_min)), exactMath.mul(exactMath.add(qrep_pre_min, qb_min), exactMath.div(exactMath.sub(1, pcv),100)));	    
 	    if (!isNaN(ffresult)) {
 		    var ffresultid = "calculated_values1" + id.slice(-1);
@@ -132,9 +133,19 @@ function calculate() {
 
 	    // PFR Rate calculation
 	    var pfrresult = exactMath.div(qpfr_hr, bw)
-	    if (pfrresult != 0) {
-	    	var pfrresultid = "calculated_values3" + id.slice(-1);
+	    var pfrresultid = "calculated_values3" + id.slice(-1);
+	    if (pfrresult != 0 && !isNaN(pfrresult)) {
 	    	document.getElementById(pfrresultid).innerHTML = +pfrresult.toFixed(2);
+	    }else if (isNaN(pfrresult) || pfrresult == 0) {
+	    	document.getElementById(pfrresultid).innerHTML = "0";
+	    }
+
+	    // Calc. clearance (mL/hr) calculation
+	    var satresult = exactMath.div((exactMath.mul(exactMath.add(qd_hr, qrep_pre_hr, qrep_post_hr, qpfr_hr), sat)), 
+	    	exactMath.add(1, exactMath.div(qrep_pre_hr, (exactMath.mul(qb_min, 60)))))
+	    if (!isNaN(satresult)) {
+	    	var calcclearid = "calculated_values5" + id.slice(-1);
+	    	document.getElementById(calcclearid).innerHTML = +satresult.toFixed(2);
 	    }
     }
 }
