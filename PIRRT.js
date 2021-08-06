@@ -31,92 +31,83 @@ let time_into_treatment = [
 ]
 
 function generateTable(table, data) {
-	let x = 1;
-	for (let element of data) {
-		let row = table.insertRow();
-		let n = 0;
-		for (var key in element) {
-			var value = element[key];
-			if (n == 0) {
-				let cell = row.insertCell();
-				let text = document.createTextNode(element["label"]);
-				cell.appendChild(text);
-				cell.outerHTML = '<th scope="row">'+element["label"]+'</th>';
-				n++;
-			}else{
-				if (table.id == "time_into_treatment") {
-					var length = 10;
-				}else{
-					var length = 9;
-				}
-				while (n < length) {
-					n++;
-					let cell = row.insertCell();
-					if (value == "input") {
-						var id = x + "" + n-1;
-						var id = id.toString();
-						cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="'+table.id+id+'" oninput="calculate()"></div>';
-					}else{
-						var id = x + "" + n-1;
-						var id = id.toString();
-						cell.innerHTML = "-";
-						cell.setAttribute("id", table.id+id);
-						if (table.id == "q_table") {
-							cell.setAttribute("onchange", "calculate()");
-							cell.setAttribute("id", "result"+(id-10));
-						} else if (table.id == "qeff_table") {
-							cell.setAttribute("id", "qeff_result"+id)
-						}
-					}
-				}
-				x++;
-			}
-		}
-	}
+    let x = 1;
+    for (let element of data) {
+        let row = table.insertRow();
+        let n = 0;
+        for (var key in element) {
+            var value = element[key];
+            if (n == 0) {
+                let cell = row.insertCell();
+                let text = document.createTextNode(element["label"]);
+                cell.appendChild(text);
+                cell.outerHTML = '<th scope="row">' + element["label"] + '</th>';
+                n++;
+            } else {
+                if (table.id == "time_into_treatment") {
+                    var length = 10;
+                } else {
+                    var length = 9;
+                }
+                while (n < length) {
+                    n++;
+                    let cell = row.insertCell();
+                    if (value == "input") {
+                        var id = x + "" + n - 1;
+                        var id = id.toString();
+                        cell.innerHTML = '<div class="input-group input-group-sm"><input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="' + table.id + id + '" oninput="calculate()"></div>';
+                    } else {
+                        var id = x + "" + n - 1;
+                        var id = id.toString();
+                        cell.innerHTML = "-";
+                        cell.setAttribute("id", table.id + id);
+                        if (table.id == "q_table") {
+                            cell.setAttribute("onchange", "calculate()");
+                            cell.setAttribute("id", "result" + (id - 10));
+                        } else if (table.id == "qeff_table") {
+                            cell.setAttribute("id", "qeff_result" + id)
+                        }
+                    }
+                }
+                x++;
+            }
+        }
+    }
 }
 
 function calculate() {
-	var id = event.target.id;
-	var id = id.toString();
-	var x = document.getElementById(id).value;
-	var resultid = event.target.id.replace("q_table", "result");
-	try {
-		result = x / 60;
-		document.getElementById(resultid).innerHTML = +result.toFixed(2);
-	}catch{}
-	if (id.slice(0,7) == "q_table") {
-		var result = Number(document.getElementById("result2"+id.slice(-1)).innerHTML.replace("-","0")) +
-								 Number(document.getElementById("result4"+id.slice(-1)).innerHTML.replace("-","0")) +
-								 Number(document.getElementById("result6"+id.slice(-1)).innerHTML.replace("-","0")) +
-								 Number(document.getElementById("result8"+id.slice(-1)).innerHTML.replace("-","0"));		
-		var x = document.getElementById(id).value;
-		var resultid = "qeff_result1"+id.slice(-1);
-		if (id.slice(-2, -1) != 1) {
-			document.getElementById(resultid).innerHTML = +result.toFixed(2);
-		}
-	}
-		ff_calc();
-}
-
-
-function ff_calc() {
-	var id = event.target.id;
-	var id = id.toString();
-	var result = Number(document.getElementById("pcv"));
-	// Number(document.getElementById("calculated_values1"+id.slice(-1)).innerHTML.replace("-","0"));
-	var x = document.getElementById(id).value;
-	var resultid = "calculated_values1"+id.slice(-1);
-	document.getElementById(resultid).innerHTML = +result.toFixed(2);
+    var id = event.target.id;
+    var id = id.toString();
+    var x = document.getElementById(id).value;
+    var resultid = event.target.id.replace("q_table", "result");
+    try {
+        result = x / 60;
+        document.getElementById(resultid).innerHTML = +result.toFixed(2);
+    } catch {}
+    if (id.slice(0, 7) == "q_table") {
+        var result = Number(document.getElementById("result2" + id.slice(-1)).innerHTML.replace("-", "0")) +
+            Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-", "0")) +
+            Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0")) +
+            Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
+        var x = document.getElementById(id).value;
+        var resultid = "qeff_result1" + id.slice(-1);
+        if (id.slice(-2, -1) != 1) {
+            document.getElementById(resultid).innerHTML = +result.toFixed(2);
+        }
+    }
+    var ffresult = Number(document.getElementById("pcv").value.replace(null,0));
+		var ffresultid = "calculated_values1" + id.slice(-1);
+		document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2);
 }
 
 // Generates tables using ID given from HTML and arrays specifying row headers at top of file
-window.onload = function () {
-	var qtable = document.getElementById("q_table");
-	var qefftable = document.getElementById("qeff_table");
-	var calctable = document.getElementById("calculated_values");
-	var timeintotreatment = document.getElementById("time_into_treatment");
-	generateTable(qtable, q_table);
-	generateTable(qefftable, qeff_table);
-	generateTable(calctable, calc_table);
-	generateTable(timeintotreatment, time_into_treatment);
+window.onload = function() {
+    var qtable = document.getElementById("q_table");
+    var qefftable = document.getElementById("qeff_table");
+    var calctable = document.getElementById("calculated_values");
+    var timeintotreatment = document.getElementById("time_into_treatment");
+    generateTable(qtable, q_table);
+    generateTable(qefftable, qeff_table);
+    generateTable(calctable, calc_table);
+    generateTable(timeintotreatment, time_into_treatment);
 }
