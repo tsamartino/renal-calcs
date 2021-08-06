@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="PIRRT.css">
+    <script src='node_modules/exact-math/dist/exact-math.js'></script>
 </head>
 
 <body>
@@ -98,7 +99,7 @@
                         <td>
                             <div class="input-group input-group-sm">
                                 <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                id="pcv">
+                                id="pcv" oninput="calculate()">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
                                 </div>

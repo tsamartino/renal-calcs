@@ -78,26 +78,48 @@ function generateTable(table, data) {
 function calculate() {
     var id = event.target.id;
     var id = id.toString();
-    var x = document.getElementById(id).value;
-    var resultid = event.target.id.replace("q_table", "result");
-    try {
-        result = x / 60;
-        document.getElementById(resultid).innerHTML = +result.toFixed(2);
-    } catch {}
-    if (id.slice(0, 7) == "q_table") {
-        var result = Number(document.getElementById("result2" + id.slice(-1)).innerHTML.replace("-", "0")) +
-            Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-", "0")) +
-            Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0")) +
-            Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
-        var x = document.getElementById(id).value;
-        var resultid = "qeff_result1" + id.slice(-1);
-        if (id.slice(-2, -1) != 1) {
-            document.getElementById(resultid).innerHTML = +result.toFixed(2);
-        }
+    if (id == "pcv") {
+    	// Recalculate all filtration fraction values
+    	console.log("pcv changed")
+    }else{
+	    var x = document.getElementById(id).value;
+	    var resultid = event.target.id.replace("q_table", "result");
+	    try {
+	        result = x / 60;
+	        document.getElementById(resultid).innerHTML = +result.toFixed(2);
+	    } catch {}
+	    if (id.slice(0, 7) == "q_table") {
+	        var result = Number(document.getElementById("result2" + id.slice(-1)).innerHTML.replace("-", "0")) +
+	            Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-", "0")) +
+	            Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-", "0")) +
+	            Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-", "0"));
+	        var x = document.getElementById(id).value;
+	        var resultid = "qeff_result1" + id.slice(-1);
+	        if (id.slice(-2, -1) != 1) {
+	            document.getElementById(resultid).innerHTML = +result.toFixed(2);
+	        }
+	    }
+	    var ffresult = 
+	    							 // (Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
+	    							 // Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-","0")) +
+	    							 // Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-","0")))
+
+	    							 // (Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
+	    							 // Number(document.getElementById("result6" + id.slice(-1)).innerHTML.replace("-","0")) +
+	    							 // Number(document.getElementById("result8" + id.slice(-1)).innerHTML.replace("-","0"))) / 
+	    							 
+	    							 // ((Number(document.getElementById("result4" + id.slice(-1)).innerHTML.replace("-","0")) +
+	    							 // Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0))) *
+
+	    							 ((1 - Number(document.getElementById("pcv").value.replace(null,0))) / 100);
+
+			var ffresultid = "calculated_values1" + id.slice(-1);
+			document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2);
     }
-    var ffresult = Number(document.getElementById("pcv").value.replace(null,0));
-		var ffresultid = "calculated_values1" + id.slice(-1);
-		document.getElementById(ffresultid).innerHTML = +ffresult.toFixed(2);
+}
+
+function results() {
+
 }
 
 // Generates tables using ID given from HTML and arrays specifying row headers at top of file
@@ -111,3 +133,9 @@ window.onload = function() {
     generateTable(calctable, calc_table);
     generateTable(timeintotreatment, time_into_treatment);
 }
+
+console.log(0.1+0.2)
+console.log(exactMath.add(0.1,0.2))
+
+
+
