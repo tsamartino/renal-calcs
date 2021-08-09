@@ -158,7 +158,7 @@ function calculate() {
 
 			// % Hourly URR caclulcation
 			var perc_urr = exactMath.mul(exactMath.sub(1, Math.exp(exactMath.div(exactMath.mul(satresult, -1), vol_ml))), 100);
-			if (!isNaN(perc_urr) && perc_urr != 0) {
+			if (!isNaN(perc_urr)) {
 				var perc_urrid = "time_into_treatment2" + (Number(id.slice(-1))+1);
 				document.getElementById(perc_urrid).innerHTML = +perc_urr.toFixed(0) + " %";
 			}
@@ -171,7 +171,9 @@ function calculate() {
 			document.getElementById("time_into_treatment1" + bun_result_id).innerHTML = +pred_bun.toFixed(0);
 
 			// Overall URR calculation
-
+			var bun_result = document.getElementById("time_into_treatment1" + bun_result_id).innerHTML;
+			var ov_urr = exactMath.mul(exactMath.div(exactMath.sub(bun, bun_result), bun), 100);
+			document.getElementById("time_into_treatment3" + bun_result_id).innerHTML = +ov_urr.toFixed(0) + " %";
     }
 }
 
