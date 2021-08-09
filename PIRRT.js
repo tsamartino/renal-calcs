@@ -95,6 +95,7 @@ function calculate() {
 	    var bw = Number(document.getElementById("bw").value.replace(null,0));
 	    var pcv = exactMath.mul(Number(document.getElementById("pcv").value.replace(null,0)), .01);
 	    var vol_ml = document.getElementById("vd_ml").value;
+	    var bun = document.getElementById("bun").value;
 
 	    var qb_min = Number(document.getElementById("q_table1" + id.slice(-1)).value.replace(null,0));
   	  var qd_hr = Number(document.getElementById("q_table2" + id.slice(-1)).value.replace(null,0));
@@ -127,11 +128,13 @@ function calculate() {
 	    }
 
 	    // Qb/Qd calculation
-	    if (qb_min != 0 && qd_min != 0) {
+	    // if (qb_min != 0) {
 				var qb_qdresult = exactMath.div(qb_min, qd_min);
 	    	var qb_qdresultid = "calculated_values2" + id.slice(-1);
-	    	document.getElementById(qb_qdresultid).innerHTML = +qb_qdresult.toFixed(2);
-	    }
+	    	if (!isNaN(qb_qdresult)) {
+	    		document.getElementById(qb_qdresultid).innerHTML = +qb_qdresult.toFixed(2);
+	    	}
+	    // }
 
 	    // PFR Rate calculation
 	    var pfrresult = exactMath.div(qpfr_hr, bw)
@@ -161,7 +164,11 @@ function calculate() {
 			}
 
 			// Predicted BUN3 calculation
-
+			var bun_id = "time_into_treatment1" + id.slice(-1);
+			bun_value = Number(document.getElementById("time_into_treatment1" + id.slice(-1)).innerHTML.replace("-","0"));
+			var pred_bun = exactMath.mul(bun_value, exactMath.sub(1, exactMath.mul(perc_urr, .01))); 
+			var bun_result_id = Number(id.slice(-1)) + 1;
+			document.getElementById("time_into_treatment1" + bun_result_id).innerHTML = +pred_bun.toFixed(0);
 
 			// Overall URR calculation
 
